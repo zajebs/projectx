@@ -34,6 +34,18 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+    <x-forms.label name="NosaukumsLV" required="true" class="col-sm-2" />
+    <div class="col-sm-10">
+        <input value="{{ old('title_lv') }}" name="title_lv" type="text"
+               class="form-control @error('title_lv') is-invalid @enderror"
+               placeholder="{{ __('enter post title in Latvian') }}">
+        @error('title_lv')
+            <span class="invalid-feedback"
+                  role="alert"><strong>{{ $message }}</strong></span>
+        @enderror
+    </div>
+</div>
+                                        <div class="form-group row">
                                             <x-forms.label name="category" required="true" class="col-sm-2" />
                                             <div class="col-sm-10">
                                                 <select name="category_id"
@@ -63,6 +75,17 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+    <x-forms.label name="Short DescriptionLV" required="true" class="col-sm-2" />
+    <div class="col-sm-10">
+        <textarea rows="5" type="text" class="form-control" name="short_description_lv"
+            placeholder="{{ __('write short description of post in Latvian') }}">{{ old('short_description_lv') }}</textarea>
+        @error('short_description_lv')
+            <span class="text-danger"
+                style="font-size: 13px;"><strong>{{ $message }}</strong></span>
+        @enderror
+    </div>
+</div>
+                                        <div class="form-group row">
                                             <x-forms.label name="description" required="true" class="col-sm-2" />
                                             <div class="col-sm-10">
                                                 <textarea id="editor2" type="text" class="form-control" name="description"
@@ -73,6 +96,17 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+    <x-forms.label name="AprakstsLV" required="true" class="col-sm-2" />
+    <div class="col-sm-10">
+        <textarea id="editor3" type="text" class="form-control" name="description_lv"
+            placeholder="{{ __('write description of post in Latvian') }}">{{ old('description_lv') }}</textarea>
+        @error('description_lv')
+            <span class="text-danger"
+                style="font-size: 13px;"><strong>{{ $message }}</strong></span>
+        @enderror
+    </div>
+</div>
                                         <div class="form-group row">
                                             <div class="col-md-3"></div>
                                             <div class="col-md-9 text-center">
@@ -145,6 +179,11 @@
 
         ClassicEditor
             .create(document.querySelector('#editor2'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#editor3'))
             .catch(error => {
                 console.error(error);
             });
