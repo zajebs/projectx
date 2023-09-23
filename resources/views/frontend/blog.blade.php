@@ -39,7 +39,6 @@
 @endsection
 
 @section('content')
-    <!-- breedcrumb section start  -->
     <x-frontend.breedcrumb-component :background="$cms->blog_background">
         {{ __('blog') }}
         <x-slot name="items">
@@ -48,7 +47,7 @@
             </li>
         </x-slot>
     </x-frontend.breedcrumb-component>
-    <!-- Blog-list section start  -->
+
     <section class="blog-list section pt-0">
         <div class="container">
             <div class="row">
@@ -59,36 +58,30 @@
                         </span>
                         <div class="blog__sidebar-wrapper">
                             <form action="{{ route('frontend.blog') }}" method="GET" id="searchForm">
-                                <!--  Search-->
                                 <div class="blog__sidebar-search blog__sidebar-item">
                                     <h2 class="text--body-2-600 item-title">{{ __('search') }}</h2>
                                     <div class="input-field">
-                                        <input type="text" placeholder="{{ __('search') }}" name="keyword"
-                                            value="{{ request('keyword') }}" />
+                                        <input type="text" placeholder="{{ __('search') }}" name="keyword" value="{{ request('keyword') }}" />
                                         <span class="icon">
                                             <x-svg.search-icon />
                                         </span>
                                     </div>
                                 </div>
-                                <!-- Category -->
                                 <div class="blog__sidebar-category blog__sidebar-item">
                                     <h2 class="text--body-2-600 item-title">{{ __('top_category') }}</h2>
                                     <div class="category">
                                         @foreach ($topCategories as $category)
                                             <div class="category-item">
                                                 <a href="{{ route('frontend.blog', ['category' => $category->slug]) }}">
-                                                    <img style="width: 162px;" src="{{ getPhoto($category->image) }}"
-                                                        alt="category-img" />
+                                                    <img style="width: 162px;" src="{{ getPhoto($category->image) }}" alt="category-img" />
                                                     <h2 class="text--body-3">{{ $category->name }}</h2>
                                                 </a>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
-                                <input id="categoryWiseSorting" name="category" type="hidden"
-                                    value="{{ request('category', '') }}">
+                                <input id="categoryWiseSorting" name="category" type="hidden" value="{{ request('category', '') }}">
                             </form>
-                            <!-- Recent Post -->
                             <div class="blog__sidebar-post blog__sidebar-item">
                                 <h2 class="text--body-2-600 item-title">{{ __('recent_post') }}</h2>
                                 <div class="post">
@@ -99,12 +92,11 @@
                                             </a>
                                             <div class="post-info">
                                                 <a href="{{ route('frontend.single.blog', $post->slug) }}"
-                                                    class="text--body-3">{{ $post->title }}</a>
+                                                    class="text--body-3">{{ currentLanguage()->code == 'lv' ? $post->title_lv : $post->title }}</a>
                                                 <div class="post-review">
                                                     <span class="date">{{ $post->created_at->format('M d, Y') }}</span>
                                                     <span class="dot"></span>
-                                                    <span class="comments">{{ $post->comments_count }}
-                                                        {{ __('comments') }}</span>
+                                                    <span class="comments">{{ $post->comments_count }} {{ __('comments') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,8 +114,7 @@
                                     <div class="blog-card">
                                         <div class="blog-card__left">
                                             <div class="blog-card__img-wrapper">
-                                                <a href="{{ route('frontend.single.blog', $post->slug) }}" alt="blog-img"
-                                                    class="blog-card__img-wrapper">
+                                                <a href="{{ route('frontend.single.blog', $post->slug) }}" class="blog-card__img-wrapper">
                                                     <img src="{{ getPhoto($post->image) }}" />
                                                 </a>
                                             </div>
@@ -134,27 +125,23 @@
                                                     <span class="icon">
                                                         <x-svg.user-icon />
                                                     </span>
-                                                    <h5 class="text--body-4 blog-card__username">
-                                                        {{ $post->author->name }}</h5>
+                                                    <h5 class="text--body-4 blog-card__username">{{ $post->author->name }}</h5>
                                                 </li>
                                                 <li class="blog-card__blog-info-item">
                                                     <span class="icon">
                                                         <x-svg.message-icon />
                                                     </span>
-                                                    <h5 class="text--body-4 blog-card__coment-num">
-                                                        {{ $post->comments_count }} {{ __('comments') }}</h5>
+                                                    <h5 class="text--body-4 blog-card__coment-num">{{ $post->comments_count }} {{ __('comments') }}</h5>
                                                 </li>
                                             </ul>
                                             <a href="{{ route('frontend.single.blog', $post->slug) }}"
                                                 class="blog-card__blog-caption text--body-2">
-                                                {{ Str::limit($post->title, 48, '...') }}
+                                                {{ currentLanguage()->code == 'lv' ? Str::limit($post->title_lv, 48, '...') : Str::limit($post->title, 48, '...') }}
                                             </a>
                                             <p class="blog-card__description text--body-4">
-                                                {{ Str::limit($post->short_description, 180, '...') }}
+                                                {{ currentLanguage()->code == 'lv' ? Str::limit($post->short_description_lv, 180, '...') : Str::limit($post->short_description, 180, '...') }}
                                             </p>
-
-                                            <a href="{{ route('frontend.single.blog', $post->slug) }}"
-                                                class="blog-card__readmore">
+                                            <a href="{{ route('frontend.single.blog', $post->slug) }}" class="blog-card__readmore">
                                                 {{ __('read more') }}
                                                 <span class="icon">
                                                     <x-svg.right-arrow-icon />
