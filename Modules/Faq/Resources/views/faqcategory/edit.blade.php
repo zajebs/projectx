@@ -29,6 +29,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+    <label class="col-sm-3 col-form-label">{{ __('name') }} (LV)<small class="text-danger">*</small></label>
+    <div class="col-sm-9">
+        <input value="{{ $faq_category->name_lv }}" name="name_lv" type="text"
+               class="form-control @error('name_lv') is-invalid @enderror"
+               placeholder="{{ __('name in Latvian') }}">
+        @error('name_lv') 
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span> 
+        @enderror
+    </div>
+</div>
+                                <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">{{ __('icon') }}<small class="text-danger">*</small></label>
                                     <div class="col-sm-9">
                                         <input type="hidden" name="icon" id="icon" value="{{ $faq_category->icon }}" />

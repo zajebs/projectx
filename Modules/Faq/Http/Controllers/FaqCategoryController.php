@@ -51,11 +51,13 @@ class FaqCategoryController extends Controller
 
         $request->validate([
             'name' => 'required|unique:faq_categories,name',
+            'name_lv' => 'required|unique:faq_categories,name',
             'icon' => 'required',
         ]);
 
         FaqCategory::create([
             'name' => $request->name,
+            'name_lv' => $request->name_lv,
             'slug' => Str::slug($request->name),
             'icon' => $request->icon
         ]);
@@ -88,11 +90,13 @@ class FaqCategoryController extends Controller
         abort_if(!userCan('faq.update'), 403);
 
         $request->validate([
-            'name' => "required|unique:faq_categories,name,{$faq_category->id}"
+            'name' => "required|unique:faq_categories,name,{$faq_category->id}",
+            'name_lv' => 'required',
         ]);
 
         $faq_category->update([
             'name' => $request->name,
+            'name_lv' => $request->name_lv,
             'slug' => Str::slug($request->name),
             'icon' => $request->icon
         ]);

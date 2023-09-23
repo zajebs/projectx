@@ -25,6 +25,7 @@
                                     <th width="5%">#</th>
                                     <th>{{ __('icon') }}</th>
                                     <th>{{ __('name') }}</th>
+                                    <th>{{ __('name') }} (LV)</th>
                                     @if (userCan('faq.update') || userCan('faq.delete'))
                                         <th width="10%">{{ __('action') }}</th>
                                     @endif
@@ -36,6 +37,7 @@
                                         <th>{{ $loop->iteration }}</th>
                                         <th><i class="{{ $faqCategory->icon }}"></i></th>
                                         <th>{{ $faqCategory->name }}</th>
+                                        <th>{{ $faqCategory->name_lv }}</th>
                                         @if (userCan('faq.update') || userCan('faq.delete'))
                                             <td>
                                                 @if (userCan('faq.update'))
