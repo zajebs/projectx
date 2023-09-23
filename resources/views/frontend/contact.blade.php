@@ -48,36 +48,31 @@
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('name') }}</label>
                                         <input type="text" name="name" id="name" class="form-control"
-                                            placeholder="Your Name">
+                                            placeholder="{{ __('your name') }}">
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">{{ __('email address') }}</label>
+                                        <label class="form-label">{{ __('email_address') }}</label>
                                         <input type="text" name="email" id="email" class="form-control"
                                             placeholder="email@example.com" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">{{ __('listing uRL') }}</label>
+                                        <label class="form-label">{{ __('listing url') }}</label>
                                         <input type="text" name="listing_url" id="listing_url" class="form-control"
-                                            placeholder="https://www.grailed.com/listing/my-listing-id" required>
+                                            placeholder="https://2life.lv/..." required>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('i need help with') }}</label>
                                         <select name="help" id="help" class="form-control" required>
                                             <option value="">{{ __('select category') }}</option>
                                             @foreach ($contactHelps as $contactHelp)
-                                                <option value="{{ $contactHelp->id }}">{{ $contactHelp->title }}
-                                                </option>
+                                            <option value="{{ $contactHelp->id }}">
+                                                {{ __('contact_help_' . $contactHelp->id) }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">{{ __('request reason') }}</label>
-                                        <select name="reason" id="reason" class="form-control" required>
-
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">{{ __('screenshot') }}</label><br />
+                                        <label class="form-label">{{ __('photo_upload') }}</label><br />
                                         <label class="input_file form-label">
                                             <span id="upload_pic">{{ __('Upload photo') }}</span>
                                             <input type="file" onchange="loadFile(event)" name="image" id="image"
@@ -88,7 +83,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">{{ __('describe your issue in a few words') }}</label>
                                         <textarea required name="message" id="message" cols="30" rows="3" class="form-control"
-                                            placeholder="If this is about an item you have purchased or sold, please include a link or screenshot to the listing."></textarea>
+                                            placeholder="{{ __('form_placeholder') }}"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-success">{{ __('send') }}</button>
                                 </form>
