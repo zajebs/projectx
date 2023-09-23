@@ -10,7 +10,7 @@ class PostCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','image'];
+    protected $fillable = ['name', 'name_lv', 'image'];
 
     protected $appends = ['image_url'];
 

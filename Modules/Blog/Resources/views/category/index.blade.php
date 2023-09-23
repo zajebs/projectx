@@ -16,7 +16,8 @@
                                 <tr>
                                     <th width="5%">#</th>
                                     <th>{{ __('image') }}</th>
-                                    <th>{{ __('name') }}</th>
+                                    <th>{{ __('name') }} (EN)</th>
+                                    <th>{{ __('name') }} (LV)</th>
                                     @if (userCan('postcategory.update') || userCan('postcategory.delete'))
                                         <th width="10%">{{ __('actions') }}</th>
                                     @endif
@@ -31,6 +32,7 @@
                                                 alt="category image">
                                         </td>
                                         <td>{{ $category->name }}</td>
+<td>{{ $category->name_lv }}</td>
                                         @if (userCan('postcategory.update') || userCan('postcategory.delete'))
                                             <td>
                                                 @if (userCan('postcategory.update'))
@@ -92,7 +94,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group row">
-                                    <x-forms.label name="name" required="true" class="col-sm-3" />
+                                    <x-forms.label name="Jaunais nosaukums angliski" required="true" class="col-sm-3" />
                                     <div class="col-sm-9">
                                         <input value="{{ $edit_category->name }}" name="name" type="text"
                                             class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
@@ -104,6 +106,19 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group row">
+    <x-forms.label name="Jaunais nosaukums latviski" required="true" class="col-sm-3" />
+    <div class="col-sm-9">
+        <input value="{{ old('name_lv', $edit_category->name_lv ?? '') }}" name="name_lv" type="text"
+            class="form-control {{ $errors->has('name_lv') ? 'is-invalid' : '' }}"
+            placeholder="{{ __('enter name in Latvian') }}">
+        @error('name_lv')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
                                 <div class="form-group row">
                                     <x-forms.label name="change image" required="true" class="col-sm-3" />
                                     <div class="col-sm-9">
@@ -130,7 +145,7 @@
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
-                                    <x-forms.label name="name" required="true" class="col-sm-3" />
+                                    <x-forms.label name="Nosaukums angliski" required="true" class="col-sm-3" />
                                     <div class="col-sm-9">
                                         <input value="{{ old('name') }}" name="name" type="text"
                                             class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
@@ -142,6 +157,19 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group row">
+        <x-forms.label name="Nosaukums latviski" required="true" class="col-sm-3" />
+        <div class="col-sm-9">
+            <input value="{{ old('name_lv') }}" name="name_lv" type="text"
+                class="form-control {{ $errors->has('name_lv') ? 'is-invalid' : '' }}"
+                placeholder="{{ __('enter name in Latvian') }}">
+            @error('name_lv')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
                                 <div class="form-group row">
                                     <x-forms.label name="image" required="true" class="col-sm-3" />
                                     <div class="col-sm-9">

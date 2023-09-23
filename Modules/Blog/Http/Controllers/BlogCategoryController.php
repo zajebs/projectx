@@ -49,10 +49,15 @@ class BlogCategoryController extends Controller
 
         $request->validate([
             'name' => 'required|unique:post_categories,name|max:255',
+            'name_lv' => 'required|unique:post_categories,name_lv|max:255',  // Added this line
             'image' => 'required',
         ]);
 
-        $category = PostCategory::create($request->except(['image']));
+        $category = PostCategory::create([
+            'name' => $request->name,
+            'name_lv' => $request->name_lv,  // Added this line
+            // ... other columns
+        ]);
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $url = $request->image->move('uploads/post/category', $request->image->hashName());
@@ -76,7 +81,7 @@ class BlogCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      * @param Request $request
-     * @param int $id
+     * @param PostCategory $post_category
      * @return Renderable
      */
     public function update(Request $request, PostCategory $post_category)
@@ -85,7 +90,11 @@ class BlogCategoryController extends Controller
             return abort(403);
         }
 
-        $post_category->update($request->except('image'));
+        $post_category->update([
+            'name' => $request->name,
+            'name_lv' => $request->name_lv,  // Added this line
+            // ... other columns
+        ]);
 
         flashSuccess('Category Updated Successfully');
         return redirect()->route('module.postcategory.index');
@@ -93,7 +102,7 @@ class BlogCategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     * @param PostCategory $post_category
      * @return Renderable
      */
     public function destroy(PostCategory $post_category)

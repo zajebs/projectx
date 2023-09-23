@@ -22,7 +22,7 @@
                                     <div class="col-md-9 px-5">
                                         @csrf
                                         <div class="form-group row">
-                                            <x-forms.label name="title" required="true" class="col-sm-2" />
+                                            <x-forms.label name="Nosaukums angliski" required="true" class="col-sm-2" />
                                             <div class="col-sm-10">
                                                 <input value="{{ old('title') }}" name="title" type="text"
                                                     class="form-control @error('title') is-invalid @enderror"
@@ -34,7 +34,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-    <x-forms.label name="NosaukumsLV" required="true" class="col-sm-2" />
+    <x-forms.label name="Nosaukums latviski" required="true" class="col-sm-2" />
     <div class="col-sm-10">
         <input value="{{ old('title_lv') }}" name="title_lv" type="text"
                class="form-control @error('title_lv') is-invalid @enderror"
@@ -46,7 +46,7 @@
     </div>
 </div>
                                         <div class="form-group row">
-                                            <x-forms.label name="category" required="true" class="col-sm-2" />
+                                            <x-forms.label name="Kategorija (latviski pārtulkosies pati)" required="true" class="col-sm-2" />
                                             <div class="col-sm-10">
                                                 <select name="category_id"
                                                     class="select2bs4 @error('category_id') is-invalid @enderror"
@@ -64,7 +64,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <x-forms.label name="short description" required="true" class="col-sm-2" />
+                                            <x-forms.label name="Īsais apraksts angliski" required="true" class="col-sm-2" />
                                             <div class="col-sm-10">
                                                 <textarea rows="5" type="text" class="form-control" name="short_description"
                                                     placeholder="{{ __('write short description of post') }}">{{ old('short description') }}</textarea>
@@ -75,7 +75,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-    <x-forms.label name="Short DescriptionLV" required="true" class="col-sm-2" />
+    <x-forms.label name="Īsais apraksts latviski" required="true" class="col-sm-2" />
     <div class="col-sm-10">
         <textarea rows="5" type="text" class="form-control" name="short_description_lv"
             placeholder="{{ __('write short description of post in Latvian') }}">{{ old('short_description_lv') }}</textarea>
@@ -86,7 +86,7 @@
     </div>
 </div>
                                         <div class="form-group row">
-                                            <x-forms.label name="description" required="true" class="col-sm-2" />
+                                            <x-forms.label name="Apraksts latviski" required="true" class="col-sm-2" />
                                             <div class="col-sm-10">
                                                 <textarea id="editor2" type="text" class="form-control" name="description"
                                                     placeholder="{{ __('write description of post') }}">{{ old('description') }}</textarea>
@@ -97,7 +97,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-    <x-forms.label name="AprakstsLV" required="true" class="col-sm-2" />
+    <x-forms.label name="Apraksts angliski" required="true" class="col-sm-2" />
     <div class="col-sm-10">
         <textarea id="editor3" type="text" class="form-control" name="description_lv"
             placeholder="{{ __('write description of post in Latvian') }}">{{ old('description_lv') }}</textarea>

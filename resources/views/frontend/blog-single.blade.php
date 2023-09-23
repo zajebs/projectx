@@ -140,7 +140,9 @@
                                             <a href="{{ route('frontend.blog', ['category' => $category->slug]) }}">
                                                 <img style="width: 168px;" src="{{ getPhoto($category->image) }}"
                                                     alt="category-img">
-                                                <h2 class="text--body-3">{{ $category->name }}</h2>
+                                                    <h2 class="text--body-3">
+    {{ (App::getLocale() === 'lv') ? $category->name_lv : $category->name }}
+</h2>
                                             </a>
                                         </div>
                                     @empty
