@@ -1,7 +1,7 @@
 @extends('layouts.frontend.layout_one')
 
 @section('title')
-    {{ $blog->title }}
+    {{ currentLanguage()->code == 'lv' ? $blog->title_lv : $blog->title }}
 @endsection
 
 @section('meta')
@@ -26,7 +26,7 @@
 @section('content')
     <!-- breedcrumb section start  -->
     <x-frontend.breedcrumb-component :background="$cms->blog_background">
-        {{ $blog->title }}
+        {{ currentLanguage()->code == 'lv' ? $blog->title_lv : $blog->title }}
         <x-slot name="items">
             <li class="breedcrumb__page-item">
                 <a href="{{ route('frontend.blog') }}" class="breedcrumb__page-link text--body-3">{{ __('blog') }}</a>
@@ -70,7 +70,7 @@
                             </li>
                         </ul>
                         <h2 class="text--heading-2 single-blog__title">
-                            {{ $blog->title }}
+                            {{ currentLanguage()->code == 'lv' ? $blog->title_lv : $blog->title }}
                         </h2>
                         <div class="single-blog__author-info">
                             <div class="author-img">
@@ -114,7 +114,7 @@
                         </div>
 
                         <p class="single-blog__content-text text--body-3">
-                            {!! $blog->description !!}
+                            {!! currentLanguage()->code == 'lv' ? $blog->description_lv : $blog->description !!}
                         </p>
 
                     </div>
@@ -158,8 +158,9 @@
                                                 <img src="{{ getPhoto($post->image) }}" alt="post-img">
                                             </a>
                                             <div class="post-info">
-                                                <a href="{{ route('frontend.single.blog', $post->slug) }}"
-                                                    class="text--body-3"> {{ $post->title }} </a>
+                                            <a href="{{ route('frontend.single.blog', $post->slug) }}" class="text--body-3"> 
+    {{ currentLanguage()->code == 'lv' ? $post->title_lv : $post->title }} 
+</a>
                                                 <div class="post-review">
                                                     <span class="date">
                                                         {{ $post->created_at->format('M d, Y') }} </span>
