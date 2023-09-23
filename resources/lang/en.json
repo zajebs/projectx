@@ -508,7 +508,7 @@
     "dashboards": "Dashboards",
     "emails": "Email List",
     "membership": "Membership",
-    "faqs": "Faqs",
+    "faqs": "Frequently asked questions",
     "home_main_banner": "Home Main Banner",
     "home_counter_background": "Home Counter Background",
     "about_body": "About Body",
@@ -703,7 +703,7 @@
     "load_more": "Load more",
     "wise_ads": "wise ads",
     "select_location": "Select Location",
-    "frequently_asked_question": "Frequently asked question",
+    "frequently_asked_question": "Frequently asked questions",
     "send_message": "Send Message",
     "send_message_via_whatsapp": "Send Message via Whatsapp",
     "send_message_via_email": "Send Message via Email",
@@ -1444,5 +1444,6 @@
     "contact_help_1": "something I sold",
     "contact_help_2": "something I purchased",
     "contact_help_3": "my account",
-    "contact_help_4": "something else"
+    "contact_help_4": "something else",
+    "faq_heading_text": "Find the answers to the frequently asked questions below!"
   }

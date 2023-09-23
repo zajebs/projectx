@@ -46,7 +46,7 @@
                 <div class="col-xl-{{ $cat_count <= 3 ? 6 : 8 }}">
                     <h2 class="faq__title text--heading-1">{{ __('frequently_asked_question') }}</h2>
                     <p class="faq__brief text--body-3">
-                        {{ $cms->faq_content }}
+                    {{ __('faq_heading_text') }}
                     </p>
                     <ul class="nav nav-pills faq__nav" id="pills-tab" role="tablist">
                         @foreach ($categories as $faq_category)
