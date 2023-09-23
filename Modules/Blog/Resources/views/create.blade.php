@@ -86,7 +86,7 @@
     </div>
 </div>
                                         <div class="form-group row">
-                                            <x-forms.label name="Apraksts latviski" required="true" class="col-sm-2" />
+                                            <x-forms.label name="Apraksts angliski" required="true" class="col-sm-2" />
                                             <div class="col-sm-10">
                                                 <textarea id="editor2" type="text" class="form-control" name="description"
                                                     placeholder="{{ __('write description of post') }}">{{ old('description') }}</textarea>
@@ -97,7 +97,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-    <x-forms.label name="Apraksts angliski" required="true" class="col-sm-2" />
+    <x-forms.label name="Apraksts latviski" required="true" class="col-sm-2" />
     <div class="col-sm-10">
         <textarea id="editor3" type="text" class="form-control" name="description_lv"
             placeholder="{{ __('write description of post in Latvian') }}">{{ old('description_lv') }}</textarea>
