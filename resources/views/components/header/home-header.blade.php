@@ -46,6 +46,7 @@
                                 <li><a href="{{ route('frontend.coupons') }}">{{ __('sell') }}</a></li>
                             @endif
                             <li><a href="{{ route('frontend.blog') }}">{{ __('blog') }}</a></li>
+                            <li><a href="{{ route('frontend.contact') }}">{{ __('help') }}</a></li>
 
                             <li class="favourit_item me-2">
                                 <a href="{{ route('frontend.favourites') }}" data-toggle="tooltip" data-placement="top"
@@ -152,7 +153,9 @@
                                 </li>
                             @endif
                             <li><a href="{{ route('frontend.blog') }}">{{ __('blog') }}</a></li>
-                            <li><a href="{{ route('frontend.blog') }}">{{ __('blog') }}</a></li>
+                            <li><a href="{{ route('frontend.contact') }}">{{ __('help') }}</a></li>
+
+
                         </ul>
                         <a href="#" class="btn btn--bg ms-3 me-3" data-bs-toggle="modal"
                             data-bs-target="#loginModal">
