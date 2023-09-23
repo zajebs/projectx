@@ -227,7 +227,7 @@ class FrontendController extends Controller
         }
         $category_slug = request('category') ?? FaqCategory::first()->slug;
         $category = FaqCategory::where('slug', $category_slug)->first();
-        $data['categories'] = FaqCategory::latest()->get(['id', 'name', 'slug', 'icon']);
+        $data['categories'] = FaqCategory::latest()->get(['id', 'name', 'name_lv', 'slug', 'icon']);
         $data['faqs'] = Faq::where('faq_category_id', $category->id)->with('faq_category:id,name,icon')->get();
 
         return view("frontend.faq", $data);

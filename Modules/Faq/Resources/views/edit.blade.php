@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">{{ __('question') }}<small
+                                    <label class="col-sm-3 col-form-label">{{ __('Question (EN)') }}<small
                                             class="text-danger">*</small></label>
                                     <div class="col-sm-9">
                                         <input value="{{ old('question', $faq->question) }}" name="question" type="text"
@@ -49,7 +49,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">{{ __('answer') }}<small
+    <label class="col-sm-3 col-form-label">{{ __('Question (LV)') }}<small class="text-danger">*</small></label>
+    <div class="col-sm-9">
+        <input value="{{ old('question_lv', $faq->question_lv) }}" name="question_lv" type="text"
+            class="form-control @error('question_lv') is-invalid @enderror"
+            placeholder="{{ __('Question in Latvian') }}">
+        @error('question_lv') 
+            <span class="invalid-feedback" role="alert">{{ $message }}</span> 
+        @enderror
+    </div>
+</div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">{{ __('Answer (EN)') }}<small
                                             class="text-danger">*</small></label>
                                     <div class="col-sm-9">
                                         <textarea id="editor2" type="text" class="form-control" name="answer" placeholder="{{ __('answer') }}">{{ old('answer', $faq->answer) }}</textarea>
@@ -58,6 +69,16 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="form-group row">
+    <label class="col-sm-3 col-form-label">{{ __('Answer (LV)') }}<small class="text-danger">*</small></label>
+    <div class="col-sm-9">
+        <textarea id="editor3" type="text" class="form-control" name="answer_lv"
+            placeholder="{{ __('Answer in Latvian') }}">{{ old('answer_lv', $faq->answer_lv) }}</textarea>
+        @error('answer_lv') 
+            <span class="text-danger" style="font-size: 13px;">{{ $message }}</span> 
+        @enderror
+    </div>
+</div>
 
                                 <div class="form-group row">
                                     <div class="offset-sm-3 col-sm-4">
@@ -89,5 +110,10 @@
             .catch(error => {
                 console.error(error);
             });
+            ClassicEditor
+        .create(document.querySelector('#editor3'))
+        .catch(error => {
+            console.error(error);
+        });
     </script>
 @endsection

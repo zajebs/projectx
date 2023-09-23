@@ -56,7 +56,7 @@
                                         <i class="{{ $faq_category->icon }}"
                                             style="font-size: 30px; line-height: 32px; font-weight: 600; color: #191f33;"></i>
                                     </span>
-                                    {{ $faq_category->name }}
+                                    {{ currentLanguage()->code == 'lv' ? $faq_category->name_lv : $faq_category->name }}
                                 </a>
                             </li>
                         @endforeach
@@ -64,13 +64,19 @@
                     <div class="tab-pane show active" id="pills-general" role="tabpanel"
                         aria-labelledby="pills-general-tab">
                         <div class="accordion faq__acordion">
-                            @foreach ($faqs as $faq)
-                                <div class="accordion-item faq__accordion-item">
-                                    <h2 class="accordion-header faq__accordion-header" id="freq{{ $faq->id }}">
-                                        <button class="accordion-button faq__accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $faq->id }}"
-                                            aria-expanded="false" aria-controls="collapse{{ $faq->id }}">
-                                            <span class="text"> {{ $faq->question }} </span>
+    @foreach ($faqs as $faq)
+        <div class="accordion-item faq__accordion-item">
+            <h2 class="accordion-header faq__accordion-header" id="freq{{ $faq->id }}">
+                <button class="accordion-button faq__accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#collapse{{ $faq->id }}"
+                    aria-expanded="false" aria-controls="collapse{{ $faq->id }}">
+                    <span class="text">
+                        @if (currentLanguage()->code == 'lv')
+                            {{ $faq->question_lv }}
+                        @else
+                            {{ $faq->question }}
+                        @endif
+                    </span>
                                             <span class="icon">
                                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -86,8 +92,12 @@
                                         class="accordion-collapse faq__accordion-collapse collapse "
                                         aria-labelledby="freq{{ $faq->id }}">
                                         <div class="accordion-body faq__accordion-body">
-                                            <p class="text--body-3">
-                                                {!! $faq->answer !!}
+                                        <p class="text--body-3">
+                        @if (currentLanguage()->code == 'lv')
+                            {!! $faq->answer_lv !!}
+                        @else
+                            {!! $faq->answer !!}
+                        @endif
                                             </p>
                                         </div>
                                     </div>

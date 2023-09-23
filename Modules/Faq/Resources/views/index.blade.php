@@ -23,10 +23,7 @@
         </div>
         <div class="card-body">
             <ul class="nav nav-pills mb-3">
-                <li class="nav-item mr-3" role="presentation">
-                    <a href="{{ route('module.faq.index') }}" class="nav-link bg-secondary active"
-                        href="">{{ __('all faqs') }}</a>
-                </li>
+
                 @foreach ($faq_category as $category)
                     <li class="nav-item mr-3" role="presentation">
                         <a class="nav-link bg-secondary active"

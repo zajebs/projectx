@@ -66,8 +66,14 @@ class FaqController extends Controller
     public function store(FaqFormRequest $request)
     {
         abort_if(!userCan('faq.create'), 403);
-
-        $faq = CreateFaq::create($request);
+    
+        $faq = Faq::create([
+            'faq_category_id' => $request->faq_category_id,
+            'question' => $request->question,
+            'question_lv' => $request->question_lv,  // jaunais lauks
+            'answer' => $request->answer,
+            'answer_lv' => $request->answer_lv,  // jaunais lauks
+        ]);
 
         if ($faq) {
             flashSuccess('Faq Created Successfully');
@@ -100,8 +106,14 @@ class FaqController extends Controller
     public function update(FaqFormRequest $request, Faq $faq)
     {
         abort_if(!userCan('faq.update'), 403);
-
-        $faq = UpdateFaq::update($request, $faq);
+    
+        $faq->update([
+            'faq_category_id' => $request->faq_category_id,
+            'question' => $request->question,
+            'question_lv' => $request->question_lv,  // jaunais lauks
+            'answer' => $request->answer,
+            'answer_lv' => $request->answer_lv,  // jaunais lauks
+        ]);
 
         if ($faq) {
             flashSuccess('Faq Updated Successfully');

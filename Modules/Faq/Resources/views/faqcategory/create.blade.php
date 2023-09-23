@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-    <label class="col-sm-3 col-form-label">{{ __('name in Latvian') }}<small class="text-danger">*</small></label>
+    <label class="col-sm-3 col-form-label">Name (LV)<small class="text-danger">*</small></label>
     <div class="col-sm-9">
         <input type="text" name="name_lv"
             class="form-control @error('name_lv') is-invalid @enderror"
