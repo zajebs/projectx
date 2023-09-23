@@ -152,6 +152,7 @@
                                 </li>
                             @endif
                             <li><a href="{{ route('frontend.blog') }}">{{ __('blog') }}</a></li>
+                            <li><a href="{{ route('frontend.blog') }}">{{ __('blog') }}</a></li>
                         </ul>
                         <a href="#" class="btn btn--bg ms-3 me-3" data-bs-toggle="modal"
                             data-bs-target="#loginModal">
