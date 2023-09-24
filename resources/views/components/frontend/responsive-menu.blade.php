@@ -86,21 +86,19 @@
                         <div class="accordion-body">
                             <ul>
                                 <li><a href="{{ route('frontend.dashboard') }}"
-                                        class="{{ request()->routeIs('frontend.dashboard') ? 'active' : '' }}">DASHBOARD</a>
+                                        class="{{ request()->routeIs('frontend.dashboard') ? 'active' : '' }}">{{__('dashboard')}}</a>
                                 </li>
                                 <li><a href="{{ route('frontend.message') }}"
-                                        class="{{ request()->routeIs('frontend.message') ? 'active' : '' }}">MESSAGES</a>
+                                        class="{{ request()->routeIs('frontend.message') ? 'active' : '' }}">{{__('message')}}</a>
                                 </li>
                                 <li><a href="{{ route('frontend.adds') }}"
-                                        class="{{ request()->routeIs('frontend.adds') ? 'active' : '' }}">MY
-                                        ITEMS</a></li>
+                                        class="{{ request()->routeIs('frontend.adds') ? 'active' : '' }}">{{__('my_items')}}</a></li>
                                 @if (session('user_plan') && session('user_plan')->ad_limit > 0)
                                 <li><a href="{{ route('frontend.post') }}"
-                                        class="{{ request()->routeIs('frontend.post') ? 'active' : '' }}">POST
-                                        ADS</a></li>
+                                        class="{{ request()->routeIs('frontend.post') ? 'active' : '' }}">{{__('post ads')}}</a></li>
                                 @endif
-                                <li><a href="#">TRANSACTIONS</a></li>
-                                <li><a href="#">FEEDBACK</a></li>
+                                <li><a href="#">{{__('transactions')}}</a></li>
+                                <li><a href="#">{{__('feedback')}}</a></li>
                                 <li><a href="{{ route('frontend.account-setting') }}"
                                         class="{{ request()->routeIs('frontend.account-setting') ? 'active' : '' }}">MY
                                         PROFILE</a></li>

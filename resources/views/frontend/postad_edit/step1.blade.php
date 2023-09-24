@@ -235,7 +235,6 @@
                                         <strong class="get_apt">{{ $ad->apartment }}</strong><br />
                                         <strong class="get_city">{{ $ad->city }}</strong><br />
                                         <strong class="get_state">{{ $ad->state }}</strong><br />
-                                        <span class="get_country">{{ $ad->adCountry->locations ?? "" }}</span><br />
                                         <span class="get_postcode">{{ $ad->postcode }}</span>
                                         <span class="arrow_right"><i class="fa fa-angle-right"></i></span>
                                     </p>
@@ -244,43 +243,7 @@
                                 @endif
                             </button>
                         </div>
-                        <h3 class="label-header-sm mt-4" style="margin-bottom: 10px">{{ __('shipping_region') }} <span
-                                class="text-danger">*</span></h3>
-                        <p>{{ __('purchase_label') }}</p>
-                        @if (isset($all_region))
-                            @foreach ($all_region as $place => $price)
-                                <div class="col-md-6 col-lg-6 mb-4 mt-4 addressSection">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h3 class="label-header-sm" style="margin-top: 10px;">{{ $place }}
-                                            </h3>
-                                        </div>
-                                        <div class="d-inline-flex justify-content-between col-md-6">
-                                            <div class="input-group input-field">
-                                                <span id="{{ 'input_' . $loop->iteration }}"
-                                                    class="input-group-text {{ in_array($place, $ad_region_name) ? '' : 'd-none' }} ">(
-                                                    {{ onlyCurrencySymbol() }} )</span>
-                                                <input
-                                                    {{ in_array($place, $ad_region_name) ? 'name=shiping_price[]' : '' }}
-                                                    type="number" placeholder="{{ __('Price') }}"
-                                                    data-price="{{ $price }}"
-                                                    id="{{ 'price_' . $loop->iteration }}"
-                                                    value="{{ in_array($place, $ad_region_name) ? $price : '' }}"
-                                                    class="form-control {{ in_array($place, $ad_region_name) ? '' : 'd-none' }} @error('shiping_price') border-danger @enderror" />
-                                            </div>
-                                            <div class="form-check form-switch pb-2" style="margin-bottom: 16px">
-                                                <input class="form-check-input form-check-lg m-0" type="checkbox"
-                                                    onchange="input_block({{ $loop->iteration }})"
-                                                    id="{{ $loop->iteration }}" data-region_id="{{ $loop->iteration }}"
-                                                    name="shipping_region[]" value="{{ $place }}"
-                                                    {{ in_array($place, $ad_region_name) ? 'checked' : '' }}>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
+                        
                     <div class="input-field__group row mt-5">
                         <div class="upload-wrapper">
                             <div class="mb-3">

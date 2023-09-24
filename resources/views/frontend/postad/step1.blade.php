@@ -276,45 +276,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <h3 class="label-header-sm mt-4" style="margin-bottom: 10px">{{ __('shipping_region') }}
-                                <span class="text-danger">*</span>
-                            </h3>
-                            <p>
-                                {{ __('Purchase_label') }}
-                            </p>
-                            @if (shipping_region())
-                                @foreach (shipping_region() as $place => $price)
-                                    <div class="col-md-6 col-lg-6 mb-4 mt-4 addressSection">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h3 class="label-header-sm" style="margin-top: 10px;">{{ $place }}
-                                                </h3>
-                                            </div>
-                                            <div class="d-inline-flex justify-content-between col-md-6">
-                                                <div class="input-group input-field">
-                                                    <span id="{{ 'input_' . $loop->iteration }}"
-                                                        class="input-group-text">( {{ onlyCurrencySymbol() }}
-                                                        )</span>
-                                                    <input name="shiping_price[]" type="number"
-                                                        placeholder="{{ __('Price') }}"
-                                                        data-price="{{ $price }}"
-                                                        id="{{ 'price_' . $loop->iteration }}"
-                                                        value="{{ $price }}"
-                                                        class="form-control @error('shiping_price') border-danger @enderror" />
-                                                </div>
-                                                <div class="form-check form-switch pb-2" style="margin-bottom: 16px">
-                                                    <input class="form-check-input input_block form-check-lg m-0"
-                                                        type="checkbox" onchange="input_block({{ $loop->iteration }})"
-                                                        id="{{ $loop->iteration }}" data-id="{{ $loop->iteration }}"
-                                                        name="shipping_region[]" value="{{ $place }}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
                         <div class="col-12">
                             <div class="upload-wrapper">
                                 <h3>

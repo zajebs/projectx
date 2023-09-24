@@ -64,7 +64,7 @@
                             <li class="favourit_item">
                                 <a href="{{ route('frontend.coupons') }}" data-toggle="tooltip" data-placement="top"
                                     title="{{ __('my coupons') }}">
-                                    <i class="fa fa-shopping-basket fa-xl"></i>
+                                    <i class="fa-solid fa-tags fa-xl"></i>
                                     {{-- <i class="fa-solid fa-bag-shopping fa-xl"></i> --}}
                                     <span>{{ Auth::user()->coupons ?? 0 }}</span>
                                 </a>
@@ -86,7 +86,7 @@
                             <li class="favourit_item">
                                 <a href="{{ route('frontend.coupons') }}" data-toggle="tooltip" data-placement="top"
                                     title="{{ __('my coupons') }}">
-                                    <i class="fa fa-shopping-basket fa-xl"></i>
+                                    <i class="fa-solid fa-tags fa-xl"></i>
                                     {{-- <i class="fa-solid fa-bag-shopping fa-xl"></i> --}}
                                     <span>{{ Auth::user()->coupons ?? 0 }}</span>
                                 </a>
