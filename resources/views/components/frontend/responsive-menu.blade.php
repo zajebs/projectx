@@ -78,7 +78,7 @@
                             data-bs-target="#usercollapseOne" aria-expanded="true" aria-controls="usercollapseOne">
                             <img src="{{ auth('user')->user()->image_url }}" class="rounded-circle me-2"
                                 style="width:50px; height:50px; ">
-                            My Account
+                                {{__('my_account')}}
                         </button>
                     </h2>
                     <div id="usercollapseOne" class="accordion-collapse collapse show" aria-labelledby="userDropdown"
@@ -100,16 +100,13 @@
                                 <li><a href="#">{{__('transactions')}}</a></li>
                                 <li><a href="#">{{__('feedback')}}</a></li>
                                 <li><a href="{{ route('frontend.account-setting') }}"
-                                        class="{{ request()->routeIs('frontend.account-setting') ? 'active' : '' }}">MY
-                                        PROFILE</a></li>
+                                        class="{{ request()->routeIs('frontend.account-setting') ? 'active' : '' }}">{{__('profile')}}</a></li>
                                 <li><a href="{{ route('frontend.my-addresses') }}"
-                                        class="{{ request()->routeIs('frontend.my-addresses') ? 'active' : '' }}">MY
-                                        ADDRESSES</a></li>
+                                        class="{{ request()->routeIs('frontend.my-addresses') ? 'active' : '' }}">{{__('addresses')}}</a></li>
                                 <li><a href="{{ route('frontend.my-sizes') }}"
-                                        class="{{ request()->routeIs('frontend.my-sizes') ? 'active' : '' }}">MY
-                                        SIZES</a></li>
+                                        class="{{ request()->routeIs('frontend.my-sizes') ? 'active' : '' }}">{{__('my sizes')}}</a></li>
                                 <li><a href="{{ route('frontend.settings') }}"
-                                        class="{{ request()->routeIs('frontend.settings') ? 'active' : '' }}">SETTINGS</a>
+                                        class="{{ request()->routeIs('frontend.settings') ? 'active' : '' }}">{{__('settings')}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -124,11 +121,9 @@
                 @foreach ($categories as $topCategory)
                 @if ($topCategory->subcategories->count() > 0)
                 <li class="accordion-header" id="headingTwo_{{ $topCategory->id }}">
-                    <a href="{{ route('frontend.adlist.search', ['category' => $topCategory->slug]) }}"
-                        class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo_{{ $topCategory->id }}" aria-expanded="false"
-                        aria-controls="collapseTwo_{{ $topCategory->id }}">{{ __(str_replace(' ', '_',
-                        strtolower($topCategory->name))) }}</a>
+                <a href="{{ route('frontend.adlist.search', ['category' => $topCategory->slug]) }}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo_{{ $topCategory->id }}" aria-expanded="false" aria-controls="collapseTwo_{{ $topCategory->id }}">
+    {{ __(strtoupper($topCategory->name)) }}
+</a>
                     <div id="collapseTwo_{{ $topCategory->id }}" class="accordion-collapse collapse"
                         aria-labelledby="headingTwo_{{ $topCategory->id }}" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
@@ -137,11 +132,9 @@
                                     @foreach ($topCategory->subcategories as $subcategory)
                                     @if ($subcategory->childCategory->count() > 0)
                                     <li class="accordion-header" id="headingThree_{{ $subcategory->id }}">
-                                        <a href="#" class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#collapseThree_{{ $subcategory->id }}" aria-expanded="false"
-                                            aria-controls="collapseThree_{{ $subcategory->id }}">{{ __(str_replace(' ',
-                                            '_', strtolower($subcategory->name))) }}</a>
+                                    <a href="#" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree_{{ $subcategory->id }}" aria-expanded="false" aria-controls="collapseThree_{{ $subcategory->id }}">
+    {{ __(strtoupper($subcategory->name)) }}
+</a>
                                         <div id="collapseThree_{{ $subcategory->id }}"
                                             class="accordion-collapse collapse"
                                             aria-labelledby="headingThree_{{ $subcategory->id }}"
