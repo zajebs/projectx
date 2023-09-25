@@ -91,12 +91,14 @@
                         <div class="col-md-6 mt-3">
                             <h3 class="label-header">{{ __('color') }} <span class="text-danger">*</span></h3>
                             <div class="input-field mb-4">
-                                <select name="color" id="color" required>
-                                    <option value="">{{ __('select_color') }}</option>
+                                {{-- <x-forms.label name="color" for="color" required="true" /> --}}
+                                <select name="color" id="color">
+                                    <option value="">{{__('select_color')}}</option>
                                     @foreach ($colors as $color)
-                                        <option {{ $color->id == $ad->color ? 'selected' : '' }}
-                                            value="{{ $color->id }}">
-                                            {{ $color->color }}</option>
+                                        <option value="{{ $color->id }}"
+                                            {{ $ad && $ad->color == $color->id ? 'selected' : '' }}>
+                                            {{ __($color->color) }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -135,14 +137,14 @@
                             <div class="measurement_chest mb-5">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active in" id="home-tab" data-bs-toggle="tab"
-                                            data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                            aria-selected="true">{{ __('in') }}</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link cm" id="home-tab" data-bs-toggle="tab"
+                                    <button class="nav-link active cm" id="home-tab" data-bs-toggle="tab"
                                             data-bs-target="#home" type="button" role="tab" aria-controls="home"
                                             aria-selected="false">{{ __('cm') }}</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link in" id="home-tab" data-bs-toggle="tab"
+                                            data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                            aria-selected="true">{{ __('in') }}</button>
                                     </li>
                                 </ul>
                                 <input type="hidden" name="measurement_type" value="in" class="measurement_type">
@@ -243,7 +245,45 @@
                                 @endif
                             </button>
                         </div>
-                        
+                                             <h3 class="label-header-sm mt-4" style="margin-bottom: 10px">{{ __('shipping_region') }} <span
+                                class="text-danger">*</span></h3>
+                        <p>{{ __('purchase_label') }}</p>
+                        @if (isset($all_region))
+                            @foreach ($all_region as $place => $price)
+                                @if ($place === 'Latvia')
+                                <div class="col-md-6 col-lg-6 mb-4 mt-4 addressSection">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h3 class="label-header-sm" style="margin-top: 10px;">{{ $place }}
+                                            </h3>
+                                        </div>
+                                        <div class="d-inline-flex justify-content-between col-md-6">
+                                            <div class="input-group input-field">
+                                                <span id="{{ 'input_' . $loop->iteration }}"
+                                                    class="input-group-text {{ in_array($place, $ad_region_name) ? '' : 'd-none' }} ">(
+                                                    {{ onlyCurrencySymbol() }} )</span>
+                                                <input
+                                                    {{ in_array($place, $ad_region_name) ? 'name=shiping_price[]' : '' }}
+                                                    type="number" placeholder="{{ __('Price') }}"
+                                                    data-price="0"
+                                                    id="{{ 'price_' . $loop->iteration }}"
+                                                    value="0"
+                                                    class="form-control {{ in_array($place, $ad_region_name) ? '' : 'd-none' }} @error('shiping_price') border-danger @enderror" />
+                                            </div>
+                                            <div class="form-check form-switch pb-2" style="margin-bottom: 16px">
+                                                <input class="form-check-input form-check-lg m-0" type="checkbox"
+                                                    onchange="input_block({{ $loop->iteration }})"
+                                                    id="{{ $loop->iteration }}" data-region_id="{{ $loop->iteration }}"
+                                                    name="shipping_region[]" value="{{ $place }}"
+                                                    {{ in_array($place, $ad_region_name) ? 'checked' : '' }}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                        @endif
+                    </div>   
                     <div class="input-field__group row mt-5">
                         <div class="upload-wrapper">
                             <div class="mb-3">
@@ -261,8 +301,7 @@
                                 </div>
                             </div>
                             <div class="mt-5">
-                                <h3>{{ __('PHOTOS') }} <span class="text-danger">{{ __('you_must_upload_at_least') }} 1
-                                        Image.{{ __('image_must_be_in_jpg_jpeg_png_format') }}</span> </h3>
+                                <h3>{{ __('upload_photos') }}<span class="text-info"> {{ __('you_must_upload_at_least') }}. {{ __('image_must_be_in_jpg_jpeg_png_format') }}</span> </h3>
                                 <div class="input-images"></div>
                             </div>
                         </div>
@@ -511,26 +550,31 @@
 
         });
 
-        function measurmentsAdd(measurements) {
-            if (measurements != '') {
-                $('.measurement_section').show();
-                measurementsArr = measurements.split(',');
-                var html = '';
-                $.each(measurementsArr, function(indexInArray, valueOfElement) {
-                    html +=
-                        '<div class="col-md-6 col-lg-4"><div class="measurement_form"><div class="row align-items-center"><div class="col-7"><h4>' +
-                        valueOfElement.replace("_", " ") +
-                        '</h4></div><div class="col-5"><div class="d-inline-flex align-items-center"> <input type="text" name="measurement_value[]" id="mes_' +
-                        valueOfElement +
-                        '" value="" class="form-control" max="999.9"><span class="ms-2">in</span></div></div></div> </div></div><input type="hidden" name="measurment_name[]" value="' +
-                        valueOfElement + '">'
-                });
+        var translations = {
+        "Bust": "{{ __('Bust') }}",
+        "Length": "{{ __('Length') }}",
+        "Shoulders": "{{ __('Shoulders') }}",
+        "Waist": "{{ __('Waist') }}"
+    };
 
-                $('.measurement_points').html(html);
-            } else {
-                $('.measurement_section').hide();
-            }
+    function measurmentsAdd(measurements) {
+        if (measurements != '') {
+            $('.measurement_section').show();
+            measurementsArr = measurements.split(',');
+            var html = '';
+            $.each(measurementsArr, function(indexInArray, valueOfElement) {
+                var translatedValue = translations[valueOfElement] ? translations[valueOfElement] : valueOfElement;
+                html +=
+                    '<div class="col-md-6 col-lg-4"><div class="measurement_form"><div class="row align-items-center"><div class="col-7"><h4>' +
+                    translatedValue +
+                    '</h4></div><div class="col-5"><div class="d-inline-flex align-items-center"> <input type="number" name="measurement_value[]" class="form-control" max="999.9"><span class="ms-2">cm</span></div></div></div> </div></div><input type="hidden" name="measurment_name[]" value="' +
+                    valueOfElement + '">'
+            });
+            $('.measurement_points').html(html);
+        } else {
+            $('.measurement_section').hide();
         }
+    }
         $(document).ready(function() {
             var measurements = $('#subcategory_id option:selected').data('measurement');
             measurmentsAdd(measurements);
@@ -852,7 +896,7 @@
                 console.log(responce.data);
 
                 var html = ``;
-                html += `<option value="0">Free Size</option>`;
+                html += `<option value="0">...</option>`;
 
                 $.each(responce.data, function(key, child_cat) {
 

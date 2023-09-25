@@ -15,7 +15,7 @@
                 <a class="breedcrumb__page-link text--body-3">/</a>
             </li>
             <li class="breedcrumb__page-item">
-                <a class="breedcrumb__page-link text--body-3">{{ __('my ads') }}</a>
+                <a class="breedcrumb__page-link text--body-3">{{ __('my_ads') }}</a>
             </li>
         </x-slot>
     </x-frontend.breedcrumb-component>

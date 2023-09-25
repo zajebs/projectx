@@ -93,6 +93,17 @@
                                     {{ $cms->contact_address }}
                                 </li>
                             </ul>
+                            <div class="footer_images" style="text-align: center; padding-top: 20px;">
+                            <div style="display: flex; justify-content: space-between;">
+    <a href="https://itunes.apple.com" target="_blank">
+        <img src="https://miro.medium.com/v2/resize:fit:600/format:webp/1*xqT83bMEz92IBYxS9UQNow.png" alt="Bilde 1" style="width: 90%; margin-right: 5%;">
+    </a>
+
+    <a href="https://play.google.com/store/ target="_blank">
+        <img src="https://miro.medium.com/v2/resize:fit:600/format:webp/1*nZu0dsnlCQltPT1QMCHFAA.png" alt="Bilde 2" style="width: 90%;">
+    </a>
+</div>
+                            </div>
                         </div>
                     </div>
                 </div>

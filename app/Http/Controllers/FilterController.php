@@ -96,10 +96,23 @@ class FilterController extends Controller
 
 
         if (isset($subcat) && $subcat != null) {
-            $query->whereHas('subcategory', function ($q) use ($subcat) {
-                $q->where('slug', [$subcat]);
-            });
+            $selected_subcategory = SubCategory::where('slug', $subcat)->first();
+            
+            if ($selected_subcategory) {
+                // Iegūstam apakškategorijas ID
+                $subcategoryId = $selected_subcategory->id;
+                
+                $sizes = AdsSize::where('sub_category_id', $subcategoryId)
+                    ->where('status', 1)
+                    ->get();
+                
+
+                // Jūsu kontrolētājā
+                $data['size_subcat'] = $sizes; // Padodam izmērus skatam
+
+            }
         }
+        
 
         if ($request->has('childcategory') && $request->childcategory != null) {
             $childcategory = $request->childcategory;
@@ -213,7 +226,17 @@ class FilterController extends Controller
 
 
         $data['adMaxPrice'] = DB::table('ads')->max('price');
-        $data['sizes'] = DB::table('ads_sizes')->where('status', 1)->get();
+
+        if ($request->has('childcategory') && $request->childcategory != null) {
+            $childCategoryIds = $request->childcategory;
+            $data['sizes'] = DB::table('ads_sizes')
+                            ->where('status', 1)
+                            ->whereIn('child_category_id', $childCategoryIds)
+                            ->get();
+        } else {
+            $data['sizes'] = DB::table('ads_sizes')->where('status', 1)->get();
+        }
+        
 
         $data['shipingLocations'] = ShipingLocations::with('products')->where('status', true)->get();
 

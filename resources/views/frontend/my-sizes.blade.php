@@ -32,7 +32,7 @@
                         <!-- Account Information -->
                         <div class="dashboard-setting__box account-information">
                             <h2 class="text--body-2-600">
-                                {{ __('My Sizes') }}
+                                {{ __('my sizes') }}
                                 <p>{{__('use_the_my_sizes_filter_to_personalize_your_search_results')}}</p>
                         </div>
                         <form action="#" method="post">

@@ -86,7 +86,7 @@
                                             {{ __('category') }}
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
                                         aria-labelledby="panelsStayOpen-headingOne">
                                         <div class="accordion-body">
                                             @foreach ($categories as $category)
@@ -146,6 +146,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                @if(!empty($size_subcat) && count($size_subcat) > 0)
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                                         <button class="accordion-button collapsed" type="button"
@@ -158,59 +161,24 @@
                                         class="accordion-collapse collapse @if (isset(request()->size)) show @endif"
                                         aria-labelledby="panelsStayOpen-headingTwo">
                                         <div class="accordion-body">
-                                            @foreach ($categories as $category)
-                                                <div class="mb-3 title">
-                                                    <h4>{{ __($category->name) }}</h4>
-                                                </div>
-                                                <div class="subcategory_list">
-
-                                                    @foreach ($category->subcategories as $subcategories)
-                                                        <div class="accordion-item">
-
-                                                            <h2 class="accordion-header"
-                                                                id="panelsStayOpen-subcatFive_{{ $subcategories->id }}">
-                                                                <button class="accordion-button collapsed " type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#panelsStayOpen-subcatTitleFive{{ $subcategories->id }}"
-                                                                    aria-expanded="false"
-                                                                    aria-controls="panelsStayOpen-subcatTitleFive{{ $subcategories->id }}">
-                                                                    {{ __($subcategories->name) }}
-                                                                </button>
-                                                            </h2>
-                                                            <div id="panelsStayOpen-subcatTitleFive{{ $subcategories->id }}"
-                                                                class="accordion-collapse collapse {{ sizeSubCategoryActive($subcategories) ? 'show' : '' }}"
-                                                                aria-labelledby="panelsStayOpen-subcatFive_{{ $subcategories->id }}">
-                                                                <div class="accordion-body">
-                                                                    <div class="checkbox_list">
-                                                                        @if (isset($sizes) && count($sizes) > 0)
-                                                                            @foreach ($sizes as $sk => $sv)
-                                                                                @if ($sv->category_id == $subcategories->category_id && $sv->sub_category_id == $subcategories->id)
-                                                                                    <div class="form-check">
-                                                                                        <input class="form-check-input"
-                                                                                            type="checkbox"
-                                                                                            value="{{ $sv->id }}"
-                                                                                            name="size[]"
-                                                                                            id="{{ $sv->size . $sv->id }}"
-                                                                                            {{ isActiveSize($sv->id) ? 'checked' : '' }}
-                                                                                            onchange="changeFilter()">
-                                                                                        <label class="form-check-label"
-                                                                                            for="{{ $sv->size . $sv->id }}">
-                                                                                            {{ $sv->size }}
-                                                                                        </label>
-                                                                                    </div>
-                                                                                @endif
-                                                                            @endforeach
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endforeach
+                                            <div class="checkbox_list">
+                                            
+                                                @foreach ($size_subcat as $size)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="{{ $size->id }}" name="size[]" id="{{ $size->size . $size->id }}" {{ isActiveSize($size->id) ? 'checked' : '' }} onchange="changeFilter()">
+                                                        <label class="form-check-label" for="{{ $size->size . $size->id }}">
+                                                            {{ $size->size }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                @endif
+
+
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                                         <button class="accordion-button collapsed" type="button"

@@ -15,7 +15,7 @@
                 <a class="breedcrumb__page-link text--body-3">/</a>
             </li>
             <li class="breedcrumb__page-item">
-                <a class="breedcrumb__page-link text--body-3 text-lowercase">{{ __('Overview') }}</a>
+                <a class="breedcrumb__page-link text--body-3 text-lowercase">{{ __('overview') }}</a>
             </li>
         </x-slot>
     </x-frontend.breedcrumb-component>

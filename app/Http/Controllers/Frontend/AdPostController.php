@@ -1121,7 +1121,7 @@ class AdPostController extends Controller
         // return response()->json($childCategory);
         $html = '';
         foreach ($childCategory as $key => $item) {
-            $html .= '<option value="' . $item->id . '"> ' . $item->name . ' </option>';
+            $html .= '<option value="' . $item->id . '"> ' . __(strtoupper($item->name)) . ' </option>';
         }
         return response()->json($html);
         // echo json_encode(ChildCategory::where('sub_category_id', $request->id)->get());

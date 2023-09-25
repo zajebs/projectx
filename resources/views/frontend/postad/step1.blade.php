@@ -29,21 +29,21 @@
                             <div class="input-select mb-2">
                                 <label for="`">{{ __('category') }} <span class="text-danger">*</span></label>
                                 <select name="subcategory_id" id="ad_category"
-                                    class="form-control select-bg @error('category_id') border-danger @enderror">
+                                        class="form-control select-bg @error('category_id') border-danger @enderror">
                                     <option value="" data-measurement="" hidden>{{ __('department_category') }} </option>
                                     @foreach ($categories as $categorie)
                                         <optgroup label="{{ __($categorie->name) }}">
                                             @if ($categorie->subcategories->count() > 0)
                                                 @foreach ($categorie->subcategories as $subcategory)
-                                                    <option data-measurement="{{ $subcategory->mesurement_point }}"
-                                                        {{ ($ad
-                                                                ? ($ad->subcategory_id == $subcategory->id
-                                                                    ? 'selected'
-                                                                    : '')
-                                                                : old('subcategory_id') == $subcategory->id)
-                                                            ? 'selected'
-                                                            : '' }}
-                                                        value="{{ $subcategory->id }}">
+                                                    <option data-measurement="{{ __($subcategory->mesurement_point) }}"
+                                                            {{ ($ad
+                                                                    ? ($ad->subcategory_id == $subcategory->id
+                                                                        ? 'selected'
+                                                                        : '')
+                                                                    : old('subcategory_id') == $subcategory->id)
+                                                                ? 'selected'
+                                                                : '' }}
+                                                            value="{{ $subcategory->id }}">
                                                         {{ __($subcategory->name) }}
                                                     </option>
                                                 @endforeach
@@ -61,11 +61,11 @@
                                         class="form-control select-bg @error('child_category_id') border-danger @enderror"
                                         disabled>
                                         @if (isset($ad) && isset($ad->child_category))
-                                            @foreach ($ad->child_category as $item)
-                                                <option value="{{ $item->id }}"
-                                                    {{ $ad->child_category_id == $item->id ? 'selected' : '' }}>
-                                                    {{ __($item->name) }}</option>
-                                            @endforeach
+                                        @foreach ($ad->child_category as $item)
+                                            <option value="{{ $item->id }}"
+                                                {{ $ad->child_category_id == $item->id ? 'selected' : '' }}>
+                                                {{ __($item->name) }}</option>
+                                        @endforeach
                                         @else
                                             <option value="">{{ __('please_select_subcategory') }}</option>
                                         @endif
@@ -110,7 +110,7 @@
                                     @foreach ($colors as $color)
                                         <option value="{{ $color->id }}"
                                             {{ $ad && $ad->color == $color->id ? 'selected' : '' }}>
-                                            {{ $color->color }}
+                                            {{ __($color->color) }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -166,16 +166,17 @@
                             </p>
                             <div class="measurement_chest mb-5">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link active in" id="home-tab" data-bs-toggle="tab"
-                                            data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                            aria-selected="true">{{ __('in') }}</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link cm" id="home-tab" data-bs-toggle="tab"
+                                <li class="nav-item" role="presentation">
+                                        <button class="nav-link active cm" id="home-tab" data-bs-toggle="tab"
                                             data-bs-target="#home" type="button" role="tab" aria-controls="home"
                                             aria-selected="false">{{ __('cm') }}</button>
                                     </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link in" id="home-tab" data-bs-toggle="tab"
+                                            data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                            aria-selected="true">{{ __('in') }}</button>
+                                    </li>
+
                                 </ul>
                                 <input type="hidden" name="measurement_type" value="in" class="measurement_type">
                                 <div class="tab-content mt-3" id="myTabContent">
@@ -280,11 +281,9 @@
                             <div class="upload-wrapper">
                                 <h3>
                                     {{ __('upload_photos') }}
-                                    <span class="text-danger">
-                                        {{ __('you_must_upload_at_least') }}
-                                        1 Image.
-                                        {{ __('image_must_be_in_jpg_jpeg_png_format') }}
-                                        <span class="text-danger">*</span>
+                                    <span class="text-info">
+                                        {{ __('you_must_upload_at_least') }}. {{ __('image_must_be_in_jpg_jpeg_png_format') }}
+                                        <span class="text-info">*</span>
                                     </span>
                                 </h3>
                                 <div class="input-images"></div>
@@ -419,6 +418,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-12">
                                         <button type="button" class="btn btn--lg text-white address_save save_address_button ">
                                             {{ ('save_address') }}
@@ -525,23 +525,32 @@
             checkSmartPrice();
         });
 
-        function measurmentsAdd(measurements) {
-            if (measurements != '') {
-                $('.measurement_section').show();
-                measurementsArr = measurements.split(',');
-                var html = '';
-                $.each(measurementsArr, function(indexInArray, valueOfElement) {
-                    html +=
-                        '<div class="col-md-6 col-lg-4"><div class="measurement_form"><div class="row align-items-center"><div class="col-7"><h4>' +
-                        valueOfElement.replace("_", " ") +
-                        '</h4></div><div class="col-5"><div class="d-inline-flex align-items-center"> <input type="number" name="measurement_value[]" class="form-control" max="999.9"><span class="ms-2">in</span></div></div></div> </div></div><input type="hidden" name="measurment_name[]" value="' +
-                        valueOfElement + '">'
-                });
-                $('.measurement_points').html(html);
-            } else {
-                $('.measurement_section').hide();
-            }
+    var translations = {
+        "Bust": "{{ __('Bust') }}",
+        "Length": "{{ __('Length') }}",
+        "Shoulders": "{{ __('Shoulders') }}",
+        "Waist": "{{ __('Waist') }}"
+    };
+
+    function measurmentsAdd(measurements) {
+        if (measurements != '') {
+            $('.measurement_section').show();
+            measurementsArr = measurements.split(',');
+            var html = '';
+            $.each(measurementsArr, function(indexInArray, valueOfElement) {
+                var translatedValue = translations[valueOfElement] ? translations[valueOfElement] : valueOfElement;
+                html +=
+                    '<div class="col-md-6 col-lg-4"><div class="measurement_form"><div class="row align-items-center"><div class="col-7"><h4>' +
+                    translatedValue +
+                    '</h4></div><div class="col-5"><div class="d-inline-flex align-items-center"> <input type="number" name="measurement_value[]" class="form-control" max="999.9"><span class="ms-2">in</span></div></div></div> </div></div><input type="hidden" name="measurment_name[]" value="' +
+                    valueOfElement + '">'
+            });
+            $('.measurement_points').html(html);
+        } else {
+            $('.measurement_section').hide();
         }
+    }
+        
         $(document).ready(function() {
             var measurements = $('#ad_category option:selected').data('measurement');
             measurmentsAdd(measurements);
@@ -967,7 +976,7 @@
                 subCategory: subCategory
             }).then(function(responce) {
                 var html = ``;
-                html += `<option value="">Select Size</option>`;
+                html += `<option value="">...</option>`;
                 $.each(responce.data, function(key, child_cat) {
                     html += `<option value="${child_cat.id}">${child_cat.size}</option>`;
                 });
