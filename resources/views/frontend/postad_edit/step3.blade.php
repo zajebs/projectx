@@ -77,15 +77,13 @@
 
                 <div class="mb-3">
 
-                    <h3>{{ __('thumbnail') }} <span class="text-danger">{{ __('you_must_upload_at_least') }} 1
-                            images.{{ __('image_must_be_in_jpg_jpeg_png_format') }}</span></h3>
+                    <h3>{{ __('thumbnail') }} <span class="text-danger">{{ __('you_must_upload_at_least') }}. {{ __('image_must_be_in_jpg_jpeg_png_format') }}</span></h3>
 
                     <div class="thumb-images"></div>
                 </div>
 
                 <div>
-                    <h3>{{ __('upload_photos') }} <span class="text-danger">{{ __('you_must_upload_at_least') }} 1
-                            images.{{ __('image_must_be_in_jpg_jpeg_png_format') }}</span></h3>
+                    <h3>{{ __('upload_photos') }} <span class="text-danger">{{ __('you_must_upload_at_least') }}. {{ __('image_must_be_in_jpg_jpeg_png_format') }}</span></h3>
                     <div class="input-images"></div>
                 </div>
 
